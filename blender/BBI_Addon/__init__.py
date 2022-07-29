@@ -72,6 +72,12 @@ def process_props(context, props, parent):
             row.prop(context.scene, prop_name)
 
 
+def scale_object(obj, scaler_x, scaler_y, scaler_z):
+    obj.select_set(True)
+    bpy.ops.transform.resize(value=(scaler_x, scaler_y, scaler_z))
+    obj.select_set(False)
+
+
 class BlobGeneratorPanel(bpy.types.Panel):
     bl_idname = 'VIEW3D_PT_object_renamer'
     bl_label = 'Bioluminescence Blender'
@@ -163,12 +169,6 @@ class RenderSceneOperator(bpy.types.Operator):
         DATA_GEN.pop(0)
 
         return {'FINISHED'}
-
-
-def scale_object(obj, scaler_x, scaler_y, scaler_z):
-    obj.select_set(True)
-    bpy.ops.transform.resize(value=(scaler_x, scaler_y, scaler_z))
-    obj.select_set(False)
 
 
 class Blob:
